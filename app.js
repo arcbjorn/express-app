@@ -2,13 +2,22 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+// import express handlebars
+const hbs = require('express-handlebars');
 
 const adminData = require('./routes/admin.routes');
 const shopRoutes = require('./routes/shop.routes');
 
 const app = express();
 
-app.set('view engine', 'pug');
+// initialize handlebars engine
+app.engine('hbs', hbs({
+  layoutsDir: 'views/layouts/',
+  defaultLayout: 'main-layout',
+  extname: 'hbs',
+}));
+// set handlebars engine
+app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 // request parser middleware
